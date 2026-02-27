@@ -1,0 +1,9 @@
+@baseUrl = http://localhost:3000/api
+
+
+
+### REGISTER
+POST {{baseUrl}}/user/register
+Content-Type: application/json
+
+
