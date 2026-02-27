@@ -1,6 +1,15 @@
+import * as Sentry from "@sentry/node";
 import { server } from "./app";
 import toobusy from "toobusy-js";
 import env from "./env";
+import dbConnect from "./config/mongodb";
+
+if (env.SENTRY_DSN) {
+  Sentry.init({
+    dsn: env.SENTRY_DSN,
+    environment: process.env.NODE_ENV ?? "development",
+  });
+}
 
 const versionState = [
   {
@@ -34,4 +43,4 @@ const MyServer = async () => {
   }
 };
 
-MyServer();
+dbConnect(() => MyServer());

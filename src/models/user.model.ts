@@ -8,6 +8,7 @@ const userSchema = new Schema<IUserDocument>(
       type: String,
       required: true,
       unique: true,
+      index: true,
       validate: {
         validator: (value: string) => emailRegex.test(value),
         message: "Invalid email address",

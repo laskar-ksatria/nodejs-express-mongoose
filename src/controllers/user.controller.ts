@@ -43,10 +43,11 @@ class UserController {
         throw new HttpError(errorStates.invalidEmailOrPassword);
       }
       const access_token = GenerateToken({ id: user._id });
+      const { password: _password, ...safeUser } = user.toObject();
       return res.status(200).json({
         success: true,
         data: {
-          user,
+          user: safeUser,
           access_token,
         },
       });
@@ -60,11 +61,17 @@ class UserController {
       const userId = req?.decoded?.id;
       if (!userId) throw new HttpError(errorStates.failedAuthentication);
       const user = await UserModel.findById(userId);
+
+      if (!user) throw new HttpError(errorStates.failedAuthentication);
+
+      const { password: _password, ...safeUser } = user.toObject();
+
       return res.status(200).json({
         success: true,
-        data: user,
+        data: { user: safeUser },
       });
     } catch (error) {
+      console.log(error);
       next(error);
     }
   }

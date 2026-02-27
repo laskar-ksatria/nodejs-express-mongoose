@@ -1,9 +1,18 @@
 @baseUrl = http://localhost:3000/api
-
-
+@accessToken = eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YTIwM2Q2ZjgwMTZiNDhmNmQ4ZDhmMCIsImlhdCI6MTc3MjIyNTQ5NCwiZXhwIjoxNzc2MTEzNDk0fQ.lqObqNNvHsG24pBktnvzI36mKVveEsNpJIGyiMbbUCUwvrwaAcVKuXYjX0enZ63SyoZ_LsAxOmNtBrogr49W_7EYA55SeSyt_1GpuVaWVG4GPK5Tm_FZbizQ0OQw07XUyu4ppPhL6bc5nOeFu0px0MMLllqt5hsHfmY-4oJKmuZ5Nel7dg1pYHpEwZjlU6fQ_RCTPJmkNPn4nb1OJpUEhl-QaZg0yEFCxqCIrU2veCyqO87JJkA717P877fsDA9ocOr_ymf45RFPWuai8qrkv3w4xykNHhM6cCCk0Z0eOL8WvQ2N1YkobbojpVv7JGf-9_8AXzVJcrDkORvmYs90Ng
 
 ### REGISTER
 POST {{baseUrl}}/user/register
 Content-Type: application/json
 
+{
+    "email": "laskar12@mail.com",
+    "full_name": "Laskar Ksatria Satika",
+    "password": "Bongkibong12"
+}
+
+
+### GET CUSTOMER
+GET {{baseUrl}}/user 
+Authorization: Bearer {{accessToken}}
 

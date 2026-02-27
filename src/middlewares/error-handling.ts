@@ -1,12 +1,14 @@
 import { Request, Response } from "express";
 import * as Sentry from "@sentry/node";
 import HttpError, { errorStates } from "../errors";
+import { NextFunction } from "@sentry/node/build/types/integrations/tracing/nest/types";
 
 // Global error handling middleware
 export const ErrorHandling = (
   error: unknown,
   req: Request,
   res: Response,
+  next: NextFunction,
 ): void => {
   // Known application errors
   if (error instanceof HttpError) {

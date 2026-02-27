@@ -10,6 +10,7 @@ const env = {
   TOKEN_EXPIRED: `${process.env.TOKEN_EXPIRED}`,
   PRIVATE_KEY: `${process.env.PRIVATE_KEY}`,
   MONGGO_URI: `${process.env.MONGGO_URI}`,
+  REDIS_PASSWORD: `${process.env.REDIS_PASSWORD}`,
 };
 
 export default env;

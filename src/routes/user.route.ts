@@ -6,7 +6,7 @@ import Authentication from "../middlewares/auth";
 const router = Router();
 
 router.post(
-  "/create",
+  "/register",
   RateLimit({ max: 10, ms: 60000 }),
   UserController.createUser,
 );

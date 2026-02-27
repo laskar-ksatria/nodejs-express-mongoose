@@ -44,9 +44,25 @@ export const securityMiddleware = (
   next: NextFunction,
 ): void => {
   try {
+    // body boleh di-assign langsung
     req.body = sanitizeObject(req.body);
-    req.query = sanitizeObject(req.query);
-    req.params = sanitizeObject(req.params);
+
+    // query dan params: mutasi in-place, jangan overwrite property (getter-only)
+    const sanitizedQuery = sanitizeObject(req.query);
+    const sanitizedParams = sanitizeObject(req.params);
+
+    // bersihkan key lama lalu isi dengan yang sudah disanitasi
+    Object.keys(req.query).forEach((key) => {
+      // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+      delete (req.query as any)[key];
+    });
+    Object.assign(req.query as any, sanitizedQuery as any);
+
+    Object.keys(req.params).forEach((key) => {
+      // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+      delete (req.params as any)[key];
+    });
+    Object.assign(req.params as any, sanitizedParams as any);
 
     next();
   } catch (err) {
